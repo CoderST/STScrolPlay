@@ -8,21 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		0FB2DD671F2872F6004E7F06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD661F2872F6004E7F06 /* AppDelegate.swift */; };
-		0FB2DD691F2872F6004E7F06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD681F2872F6004E7F06 /* ViewController.swift */; };
 		0FB2DD6C1F2872F6004E7F06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FB2DD6A1F2872F6004E7F06 /* Main.storyboard */; };
 		0FB2DD6E1F2872F6004E7F06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FB2DD6D1F2872F6004E7F06 /* Assets.xcassets */; };
 		0FB2DD711F2872F6004E7F06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FB2DD6F1F2872F6004E7F06 /* LaunchScreen.storyboard */; };
+		0FB2DDA61F287564004E7F06 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD951F287564004E7F06 /* ViewController.swift */; };
+		0FB2DDA71F287564004E7F06 /* STModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD971F287564004E7F06 /* STModel.swift */; };
+		0FB2DDA81F287564004E7F06 /* STPlayerToolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD981F287564004E7F06 /* STPlayerToolModel.swift */; };
+		0FB2DDA91F287564004E7F06 /* STConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD9A1F287564004E7F06 /* STConfiguration.swift */; };
+		0FB2DDAA1F287564004E7F06 /* STDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD9B1F287564004E7F06 /* STDownLoader.swift */; };
+		0FB2DDAB1F287564004E7F06 /* STFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD9C1F287564004E7F06 /* STFileManager.swift */; };
+		0FB2DDAC1F287564004E7F06 /* STPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD9D1F287564004E7F06 /* STPlayer.swift */; };
+		0FB2DDAD1F287564004E7F06 /* STReourceLoaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD9E1F287564004E7F06 /* STReourceLoaderManager.swift */; };
+		0FB2DDAE1F287564004E7F06 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD9F1F287564004E7F06 /* UIColor-Extension.swift */; };
+		0FB2DDAF1F287564004E7F06 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DDA01F287564004E7F06 /* URL+Extension.swift */; };
+		0FB2DDB01F287564004E7F06 /* STPlayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DDA11F287564004E7F06 /* STPlayProtocol.swift */; };
+		0FB2DDB11F287564004E7F06 /* STCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DDA31F287564004E7F06 /* STCell.swift */; };
+		0FB2DDB21F287564004E7F06 /* STViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DDA51F287564004E7F06 /* STViewModel.swift */; };
 		B6CECA3030781F3D8A9262ED /* Pods_STScrolPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EA24FC8D414D46FC7107D /* Pods_STScrolPlay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0FB2DD631F2872F6004E7F06 /* STScrolPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STScrolPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FB2DD661F2872F6004E7F06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0FB2DD681F2872F6004E7F06 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0FB2DD6B1F2872F6004E7F06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0FB2DD6D1F2872F6004E7F06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FB2DD701F2872F6004E7F06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FB2DD721F2872F6004E7F06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FB2DD951F287564004E7F06 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0FB2DD971F287564004E7F06 /* STModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STModel.swift; sourceTree = "<group>"; };
+		0FB2DD981F287564004E7F06 /* STPlayerToolModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STPlayerToolModel.swift; sourceTree = "<group>"; };
+		0FB2DD9A1F287564004E7F06 /* STConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STConfiguration.swift; sourceTree = "<group>"; };
+		0FB2DD9B1F287564004E7F06 /* STDownLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STDownLoader.swift; sourceTree = "<group>"; };
+		0FB2DD9C1F287564004E7F06 /* STFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STFileManager.swift; sourceTree = "<group>"; };
+		0FB2DD9D1F287564004E7F06 /* STPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STPlayer.swift; sourceTree = "<group>"; };
+		0FB2DD9E1F287564004E7F06 /* STReourceLoaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STReourceLoaderManager.swift; sourceTree = "<group>"; };
+		0FB2DD9F1F287564004E7F06 /* UIColor-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
+		0FB2DDA01F287564004E7F06 /* URL+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		0FB2DDA11F287564004E7F06 /* STPlayProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STPlayProtocol.swift; sourceTree = "<group>"; };
+		0FB2DDA31F287564004E7F06 /* STCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STCell.swift; sourceTree = "<group>"; };
+		0FB2DDA51F287564004E7F06 /* STViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STViewModel.swift; sourceTree = "<group>"; };
 		1F114C7C7FAE96B5296253C5 /* Pods-STScrolPlay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STScrolPlay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STScrolPlay/Pods-STScrolPlay.debug.xcconfig"; sourceTree = "<group>"; };
 		7D6EA24FC8D414D46FC7107D /* Pods_STScrolPlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STScrolPlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1643F87255B5F30D4442102 /* Pods-STScrolPlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STScrolPlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-STScrolPlay/Pods-STScrolPlay.release.xcconfig"; sourceTree = "<group>"; };
@@ -61,14 +85,74 @@
 		0FB2DD651F2872F6004E7F06 /* STScrolPlay */ = {
 			isa = PBXGroup;
 			children = (
+				0FB2DD931F287564004E7F06 /* Class */,
 				0FB2DD661F2872F6004E7F06 /* AppDelegate.swift */,
-				0FB2DD681F2872F6004E7F06 /* ViewController.swift */,
 				0FB2DD6A1F2872F6004E7F06 /* Main.storyboard */,
 				0FB2DD6D1F2872F6004E7F06 /* Assets.xcassets */,
 				0FB2DD6F1F2872F6004E7F06 /* LaunchScreen.storyboard */,
 				0FB2DD721F2872F6004E7F06 /* Info.plist */,
 			);
 			path = STScrolPlay;
+			sourceTree = "<group>";
+		};
+		0FB2DD931F287564004E7F06 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				0FB2DDA11F287564004E7F06 /* STPlayProtocol.swift */,
+				0FB2DD961F287564004E7F06 /* Model */,
+				0FB2DDA41F287564004E7F06 /* ViewModel */,
+				0FB2DD941F287564004E7F06 /* Controller */,
+				0FB2DDA21F287564004E7F06 /* View */,
+				0FB2DD991F287564004E7F06 /* STPlayer */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		0FB2DD941F287564004E7F06 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0FB2DD951F287564004E7F06 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0FB2DD961F287564004E7F06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0FB2DD971F287564004E7F06 /* STModel.swift */,
+				0FB2DD981F287564004E7F06 /* STPlayerToolModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0FB2DD991F287564004E7F06 /* STPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				0FB2DD9A1F287564004E7F06 /* STConfiguration.swift */,
+				0FB2DD9B1F287564004E7F06 /* STDownLoader.swift */,
+				0FB2DD9C1F287564004E7F06 /* STFileManager.swift */,
+				0FB2DD9D1F287564004E7F06 /* STPlayer.swift */,
+				0FB2DD9E1F287564004E7F06 /* STReourceLoaderManager.swift */,
+				0FB2DD9F1F287564004E7F06 /* UIColor-Extension.swift */,
+				0FB2DDA01F287564004E7F06 /* URL+Extension.swift */,
+			);
+			path = STPlayer;
+			sourceTree = "<group>";
+		};
+		0FB2DDA21F287564004E7F06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0FB2DDA31F287564004E7F06 /* STCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0FB2DDA41F287564004E7F06 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0FB2DDA51F287564004E7F06 /* STViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		54173D022B17D2C2946AFCAA /* Pods */ = {
@@ -211,8 +295,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FB2DD691F2872F6004E7F06 /* ViewController.swift in Sources */,
+				0FB2DDA61F287564004E7F06 /* ViewController.swift in Sources */,
+				0FB2DDAE1F287564004E7F06 /* UIColor-Extension.swift in Sources */,
+				0FB2DDA81F287564004E7F06 /* STPlayerToolModel.swift in Sources */,
+				0FB2DDB21F287564004E7F06 /* STViewModel.swift in Sources */,
+				0FB2DDAF1F287564004E7F06 /* URL+Extension.swift in Sources */,
+				0FB2DDAB1F287564004E7F06 /* STFileManager.swift in Sources */,
+				0FB2DDA71F287564004E7F06 /* STModel.swift in Sources */,
+				0FB2DDB01F287564004E7F06 /* STPlayProtocol.swift in Sources */,
 				0FB2DD671F2872F6004E7F06 /* AppDelegate.swift in Sources */,
+				0FB2DDAC1F287564004E7F06 /* STPlayer.swift in Sources */,
+				0FB2DDAD1F287564004E7F06 /* STReourceLoaderManager.swift in Sources */,
+				0FB2DDA91F287564004E7F06 /* STConfiguration.swift in Sources */,
+				0FB2DDAA1F287564004E7F06 /* STDownLoader.swift in Sources */,
+				0FB2DDB11F287564004E7F06 /* STCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +474,7 @@
 				0FB2DD771F2872F6004E7F06 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
