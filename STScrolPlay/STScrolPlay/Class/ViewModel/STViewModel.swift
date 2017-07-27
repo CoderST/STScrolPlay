@@ -80,6 +80,8 @@ class STViewModel: NSObject,PlayProtocol {
             "http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4"]
     }()
 
+    
+    // MARK:- 网络请求
     func loadDatas(finishCallBack : @escaping ()->(), failCallBack : @escaping (_ message : String)->()){
         let urlString = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-101&iid=11612214903&idfa=99F096BA-477A-4D0A-AB26-69B76DDB85C6&version_code=5.8.0&device_type=iPhone%205%20(Global)&live_sdk_version=130&os_version=8.4&screen_width=640&aid=7&vid=D5CDF3B6-1637-454E-B4BD-5CA1DF31E543&device_id=4598024398&os_api=18&app_name=joke_essay&device_platform=iphone&ac=WIFI&openudid=7881ad6e7d291af91681a760a49f1202e5954292&channel=App%20Store&city=%E5%8C%97%E4%BA%AC%E5%B8%82&content_type=-101&count=30&essence=1&latitude=40.08480361223238&longitude=116.391737424483&message_cursor=0&min_time=0&mpic=1"
         NetworkTools.requestData(.get, URLString: urlString) { (result) in
@@ -139,11 +141,11 @@ extension STViewModel : UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        
+        print(indexPath.item)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: STCollectionViewCellIdentifier, for: indexPath) as! STCell
         cell.contentView.backgroundColor = UIColor.randomColor()
         cell.indexPath = indexPath
-        
+       
         //        let placeholderName = indexPath.item % 2 == 0 ? "placeholder1" : "placeholder2"
         //        cell.videoImv.image = UIImage(named: placeholderName)
         let mod = model.data?.data[indexPath.item]
@@ -164,21 +166,22 @@ extension STViewModel : UICollectionViewDataSource{
             cell.cellStyle = kJPPlayUnreachCellStyle.none
         }
         
-        print("cellForItemAt")
+         print("index = \(indexPath.item)---\(cell.cellStyle)")
         return cell
         
     }
 
 }
 
+// MARK:- UICollectionViewDelegateFlowLayout
 extension STViewModel : UICollectionViewDelegateFlowLayout {
     // collectionViewLayout size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        
+         let mod = model.data?.data[indexPath.item]
         let height : CGFloat = CGFloat(arc4random_uniform(100) + 50)
         
-        let size  = CGSize(width: sScreenW, height: RowHei)
-        
+        let size  = CGSize(width: mod?.group?.videoWidth ?? 0, height:  mod?.group?.videoHeight ?? 0)
+//        let size  = CGSize(width: sScreenW, height: RowHei)
         return size
     }
     
@@ -212,15 +215,15 @@ extension STViewModel : UICollectionViewDelegateFlowLayout {
     
 }
 
-
 // MARK:- 私有方法
 extension STViewModel {
     
     // 找到最合适要播放的cell
     func findTheBestToPlayVideoCell() -> STCell?{
+        //
         var windowRect = UIScreen.main.bounds
-        windowRect.origin.y = NavAndStatusTotalHei;
-        windowRect.size.height -= (NavAndStatusTotalHei + TabbarHei);
+//        windowRect.origin.y = NavAndStatusTotalHei;
+//        windowRect.size.height -= (NavAndStatusTotalHei + TabbarHei);
         
         // To find next cell need play video.
         // 找到下一个要播放的cell(最在屏幕中心的).
@@ -263,13 +266,30 @@ extension STViewModel {
                     }
                 }
                 else{
-                    let coorCenter = cell.superview?.convert(cell.center, to: nil)
-                    let delta = fabs((coorCenter?.y)!-NavAndStatusTotalHei-windowRect.size.height*0.5)
-                    if delta < gap {
-                        print(delta)
-                        gap = delta
+                    /**********cell固定高度算法*************/
+//                    let coorCenter = cell.superview?.convert(cell.center, to: nil)
+//                    let delta = fabs((coorCenter?.y)!-NavAndStatusTotalHei-windowRect.size.height*0.5)
+//                    if delta < gap {
+//                        print(delta)
+//                        gap = delta
+//                        finialCell = cell
+//                    }
+                    
+                    /***********cell动态高度算法************/
+                    guard let coorCgrect = cell.superview?.convert(cell.frame, to: nil) else { continue }
+
+                    let point = CGPoint(x: sScreenW * 0.5, y: screenSize.height * 0.5)
+             
+                    if coorCgrect.contains(point) &&  cell.cellStyle == kJPPlayUnreachCellStyle.none{
                         finialCell = cell
+                        
                     }
+                    
+                    if cell.indexPath?.item == model.data!.data.count - 1{
+                        finialCell = cell
+                        break
+                    }
+                    /**********************/
                 }
             }
         }
@@ -277,8 +297,7 @@ extension STViewModel {
         return finialCell
         
     }
-    
-    
+
     /// cell滚动停止相关操作
     func handleScrollStop() {
         
@@ -364,15 +383,26 @@ extension STViewModel {
         windowRect.size.height -= NavAndStatusTotalHei;
         
         if currentDerection==kScrollDerection.up { // 向上滚动
-            let cellLeftUpPoint = cell.frame.origin
+            var cellLeftUpPoint = cell.frame.origin
             let cellDownY = cellLeftUpPoint.y+cell.frame.size.height
             var cellLeftDownPoint = CGPoint(x: 0, y: cellDownY)
             // 不要在边界上.
             cellLeftDownPoint.y -= 1
             let coorPoint = playingCell?.superview?.convert(cellLeftDownPoint, to: nil)
+            let leftDowmcontain = windowRect.contains(coorPoint!)
             
-            let contain = windowRect.contains(coorPoint!)
-            return contain
+            // 此处也要判断下"左上"点 因为如果视频比较大,左上点在视野 而左下还没有进入视野
+            cellLeftUpPoint.y += 1
+            let leftUpcoorPoint = cell.superview?.convert(cellLeftUpPoint, to: nil)
+            
+            let leftUpcontain = windowRect.contains(leftUpcoorPoint!)
+
+            if leftDowmcontain == false && leftUpcontain == false{
+                
+                return false
+            }
+            return true
+//            return contain
         }
         else if(currentDerection==kScrollDerection.down){ // 向下滚动
             var cellLeftUpPoint = cell.frame.origin
@@ -380,8 +410,21 @@ extension STViewModel {
             cellLeftUpPoint.y += 1
             let coorPoint = cell.superview?.convert(cellLeftUpPoint, to: nil)
             
-            let contain = windowRect.contains(coorPoint!)
-            return contain
+            let leftUpcontain = windowRect.contains(coorPoint!)
+            
+            // 此处也要判断下"左下"点 因为如果视频比较大,左上点在视野 而左下还没有进入视野
+            let cellDownY = cellLeftUpPoint.y+cell.frame.size.height
+            var cellLeftDownPoint = CGPoint(x: 0, y: cellDownY)
+            // 不要在边界上.
+            cellLeftDownPoint.y -= 1
+            let leftDowmcoorPoint = playingCell?.superview?.convert(cellLeftDownPoint, to: nil)
+            let leftDowmcontain = windowRect.contains(leftDowmcoorPoint!)
+
+            if leftDowmcontain == false && leftUpcontain == false{
+                
+                return false
+            }
+            return true
         }
         return true
     }
@@ -422,7 +465,14 @@ extension STViewModel {
         let configuration = STConfiguration()
         configuration.isCache = false
         configuration.palyView = palyView
-        configuration.playerLayerF = CGRect(x: 0, y: 0, width: sScreenW, height: RowHei)
+        guard let indexPath = playingCell?.indexPath else {
+            print("没有----indexPath")
+            return
+        }
+        let mod = model.data?.data[indexPath.item]
+        let width = CGFloat(mod?.group?.videoWidth ?? 0)
+        let height = CGFloat(mod?.group?.videoHeight ?? 0)
+        configuration.playerLayerF = CGRect(x: 0, y: 0, width: width, height: height)
         guard let url = URL(string: playUrlString) else { return }
         player = STPlayer()
         player?.playWithURL(url, configuration)

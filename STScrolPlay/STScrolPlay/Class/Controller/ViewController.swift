@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     // MARK:- 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        automaticallyAdjustsScrollViewInsets = false
         let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
 //        print("path = \(path)")
         

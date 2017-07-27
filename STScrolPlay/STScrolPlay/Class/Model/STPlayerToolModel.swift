@@ -7,7 +7,8 @@
 //  画虚线
 
 import UIKit
-
+fileprivate let navHeight : CGFloat = 0
+fileprivate let tabHeight : CGFloat = 0
 class STPlayerToolModel: NSObject {
 
     // 虚线区域View
@@ -15,7 +16,7 @@ class STPlayerToolModel: NSObject {
 
     
     let generateTableViewRange = { () -> UIView in
-        let tableViewRange = UIView(frame: CGRect(x: 0, y: NavAndStatusTotalHei, width: screenSize.width, height: screenSize.height-NavAndStatusTotalHei-TabbarHei))
+        let tableViewRange = UIView(frame: CGRect(x: 0, y: navHeight, width: screenSize.width, height: screenSize.height-navHeight-tabHeight))
         tableViewRange.isUserInteractionEnabled = false
         tableViewRange.backgroundColor = UIColor.clear
         tableViewRange.isHidden = true
@@ -46,8 +47,8 @@ class STPlayerToolModel: NSObject {
         let linePath1 = UIBezierPath()
         linePath1.move(to: CGPoint(x: 1, y: 1))
         linePath1.addLine(to: CGPoint(x: screenSize.width-1, y: 1))
-        linePath1.addLine(to: CGPoint(x: screenSize.width-1, y: screenSize.height-NavAndStatusTotalHei-1-TabbarHei))
-        linePath1.addLine(to: CGPoint(x: 1, y: screenSize.height-NavAndStatusTotalHei-1-TabbarHei))
+        linePath1.addLine(to: CGPoint(x: screenSize.width-1, y: screenSize.height-navHeight-1-tabHeight))
+        linePath1.addLine(to: CGPoint(x: 1, y: screenSize.height-navHeight-1-tabHeight))
         linePath1.addLine(to: CGPoint(x: 1, y: 1))
         
         let layer1 = CAShapeLayer()
@@ -61,8 +62,8 @@ class STPlayerToolModel: NSObject {
         tableViewRange.layer.addSublayer(layer1)
         
         let linePath2 = UIBezierPath()
-        linePath2.move(to: CGPoint(x: 1, y: 0.5*(screenSize.height-NavAndStatusTotalHei-1-TabbarHei)))
-        linePath2.addLine(to: CGPoint(x: screenSize.width-1, y: 0.5*(screenSize.height-NavAndStatusTotalHei-1-TabbarHei)))
+        linePath2.move(to: CGPoint(x: 1, y: 0.5*(screenSize.height-navHeight-1-tabHeight)))
+        linePath2.addLine(to: CGPoint(x: screenSize.width-1, y: 0.5*(screenSize.height-navHeight-1-tabHeight)))
         
         let layer2 = CAShapeLayer()
         let drawColor2 = UIColor(colorLiteralRed: 0, green: 0.98, blue: 0, alpha: 1)

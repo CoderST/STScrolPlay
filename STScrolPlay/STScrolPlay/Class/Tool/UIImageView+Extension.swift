@@ -53,7 +53,7 @@ extension UIImageView {
             
             var actualTime : CMTime = CMTimeMake(0,0)
             
-            var image:CGImage!
+            var image:CGImage?
             
             do{
                 image = try generator.copyCGImage(at: time, actualTime: &actualTime)
@@ -62,6 +62,7 @@ extension UIImageView {
             }
 
             DispatchQueue.main.async {
+                guard let image = image else { return }
                 self.image = UIImage(cgImage: image)
             }
         }

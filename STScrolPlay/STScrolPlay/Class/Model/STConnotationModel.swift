@@ -7,7 +7,10 @@
 //
 
 import UIKit
-
+/// 可见视图区域
+fileprivate let viewHeight = sScreenH - NavAndStatusTotalHei - TabbarHei
+/// 可见视图比例系数
+fileprivate let viewHeightScale : CGFloat = 2 / 3
 class STConnotationModel: BaseModel {
 
     var message: String = ""
@@ -51,10 +54,39 @@ class DataDict: BaseModel {
             for dict in valueDict{
                 let model = DataArray(dict: dict)
                 if model.group?.mp4_url != nil && model.group!.mp4_url.characters.count > 0{
+                    // 处理视频宽高
+//                    let scale =  / Int(sScreenW)
+//                print("oooooooooo",model.group!.video_width,model.group!.video_height)
+                    if CGFloat(model.group!.video_width) >= sScreenW {
+                        model.group!.videoWidth = Int(sScreenW)
+                        model.group!.videoHeight = Int(CGFloat(model.group!.video_height) *  sScreenW / CGFloat(model.group!.video_width))
+                        // 缩小后发现高度还是大于视野 
+                        
+                        let resultHeight = CGFloat(model.group!.videoHeight) - viewHeight
+                        if resultHeight > 0 {
+                            model.group!.videoHeight = Int(viewHeight * viewHeightScale)
+                            model.group!.videoWidth = model.group!.videoHeight * model.group!.videoWidth / model.group!.videoHeight
+                        }
+                        
+                    }else{
+                        
+                        model.group!.videoWidth = model.group!.video_width
+                        model.group!.videoHeight = model.group!.video_height
+                        
+                        
+                        let resultHeight = CGFloat(model.group!.videoHeight) - viewHeight
+                        if Int(resultHeight) > 0 {
+                            model.group!.videoHeight = Int(viewHeight * viewHeightScale)
+                            model.group!.videoWidth = model.group!.videoHeight * model.group!.video_width / model.group!.video_height
+                        }
+
+                    }
+
+                    print("kkkkkkkkkkk",model.group!.videoWidth,model.group!.videoHeight)
                     
                     data.append(model)
                 }else{
-                    print("没有mp4_url-----")
+//                    print("没有mp4_url-----")
                 }
                 
             }
@@ -86,6 +118,7 @@ class DataArray: BaseModel {
         if key == "group" {
             guard let valueDict = value as? [String : Any] else { return }
             group = Group(dict: valueDict)
+            
         }else{
             
             super.setValue(value, forUndefinedKey: key)
@@ -144,8 +177,6 @@ class Group: BaseModel {
     
     var type: Int = 0
     
-    var video_width: Int = 0
-    
     var neihan_hot_start_time: String = ""
     
     var is_video: Int = 0
@@ -200,8 +231,6 @@ class Group: BaseModel {
     
     var video720p: Video_720P?
     
-    var video_height: Int = 0
-    
     var is_public_url: Int = 0
     
     var content: String = ""
@@ -229,6 +258,13 @@ class Group: BaseModel {
     var allow_dislike: Bool = false
     
     var danmaku_attrs: Danmaku_Attrs?
+    
+    var video_width: Int = 0
+    
+    var video_height: Int = 0
+    /// 视频尺寸
+    var videoWidth: Int = 0
+    var videoHeight: Int = 0
     
 }
 

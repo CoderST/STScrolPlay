@@ -22,7 +22,13 @@ class STCell: UICollectionViewCell {
     
     lazy var label : UILabel = UILabel()
     
-    lazy var videoImv : UIImageView = UIImageView()
+    lazy var videoImv : UIImageView = {
+       
+        let videoImv = UIImageView()
+        videoImv.contentMode = .scaleAspectFit
+        return videoImv
+        
+    }()
     
     public var videoPath = String()
     
@@ -42,22 +48,24 @@ class STCell: UICollectionViewCell {
 //        }
 //    }
 
-    public var indexPath: IndexPath {
-        get {
-            return self.indexPath
-        }
-        set {
-            let placeholderName = newValue.row % 2 == 0 ? "placeholder1" : "placeholder2"
-            label.text = "\(newValue.row % 2)"
-//            videoImv.image = UIImage(named: placeholderName)
-        }
-    }
+    public var indexPath: IndexPath?
+    
+//    public var indexPath: IndexPath {
+//        get {
+//            return self.indexPath
+//        }
+//        set {
+//            let placeholderName = newValue.row % 2 == 0 ? "placeholder1" : "placeholder2"
+//            label.text = "\(newValue.row % 2)"
+////            videoImv.image = UIImage(named: placeholderName)
+//        }
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.addSubview(label)
         contentView.addSubview(videoImv)
+        contentView.addSubview(label)
         
     }
     
@@ -66,7 +74,7 @@ class STCell: UICollectionViewCell {
         super.layoutSubviews()
         
         label.frame = CGRect(x: 0, y: 0, width: 100, height: frame.height)
-        videoImv.frame = CGRect(x: label.frame.maxX, y: 0, width: 200, height: frame.height)
+        videoImv.frame = bounds
     }
     
     required init?(coder aDecoder: NSCoder) {
