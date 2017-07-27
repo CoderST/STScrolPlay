@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Alamofire
+import MJExtension
 let sScreenW = UIScreen.main.bounds.width
 let sScreenH = UIScreen.main.bounds.height
 let screenSize = UIScreen.main.bounds.size
@@ -26,7 +27,8 @@ public enum kScrollDerection: Int {
 fileprivate let STCollectionViewCellIdentifier = "STCollectionViewCellIdentifier"
 class STViewModel: NSObject,PlayProtocol {
     
-    lazy var models : [STModel] = [STModel]()
+//    lazy var models : [STModel] = [STModel]()
+    lazy var model : STConnotationModel = STConnotationModel()
     
     lazy var rangeToolModel : STPlayerToolModel = STPlayerToolModel()
     
@@ -78,14 +80,37 @@ class STViewModel: NSObject,PlayProtocol {
             "http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4"]
     }()
 
-    
-    func setupDatas() {
-        for videoPathString in videoPathStrings{
-            let model = STModel()
-            model.urlString = videoPathString
-            models.append(model)
+    func loadDatas(finishCallBack : @escaping ()->(), failCallBack : @escaping (_ message : String)->()){
+        let urlString = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-101&iid=11612214903&idfa=99F096BA-477A-4D0A-AB26-69B76DDB85C6&version_code=5.8.0&device_type=iPhone%205%20(Global)&live_sdk_version=130&os_version=8.4&screen_width=640&aid=7&vid=D5CDF3B6-1637-454E-B4BD-5CA1DF31E543&device_id=4598024398&os_api=18&app_name=joke_essay&device_platform=iphone&ac=WIFI&openudid=7881ad6e7d291af91681a760a49f1202e5954292&channel=App%20Store&city=%E5%8C%97%E4%BA%AC%E5%B8%82&content_type=-101&count=30&essence=1&latitude=40.08480361223238&longitude=116.391737424483&message_cursor=0&min_time=0&mpic=1"
+        NetworkTools.requestData(.get, URLString: urlString) { (result) in
+            
+            guard let resultDict = result as? [String : Any] else { return }
+            
+            guard let resultMessage = resultDict["message"] as? String else { return }
+            
+            if resultMessage != "success"{
+                failCallBack(resultMessage)
+                return
+            }
+            
+//             self.model = STConnotationModel.mj_object(withKeyValues: resultDict)
+            self.model = STConnotationModel(dict: resultDict)
+            
+//            guard let dataDict = resultDict["data"] as? [String : Any] else { return }
+            
+            
+            
+            finishCallBack()
         }
     }
+    
+//    func setupDatas() {
+//        for videoPathString in videoPathStrings{
+//            let model = STModel()
+//            model.urlString = videoPathString
+//            models.append(model)
+//        }
+//    }
 }
 
 extension STViewModel {
@@ -105,8 +130,12 @@ extension STViewModel {
 
 extension STViewModel : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        
-        return models.count
+//        if model.data == nil{
+//            
+//            return 0
+//        }
+        let count = model.data?.data.count ?? 0
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
@@ -117,13 +146,14 @@ extension STViewModel : UICollectionViewDataSource{
         
         //        let placeholderName = indexPath.item % 2 == 0 ? "placeholder1" : "placeholder2"
         //        cell.videoImv.image = UIImage(named: placeholderName)
-        let model = models[indexPath.row]
-        cell.videoPath = model.urlString
+        let mod = model.data?.data[indexPath.item]
+        cell.videoPath = mod?.group?.mp4_url ?? ""
+        cell.videoImv.getNetWorkVidoeImage(url: cell.videoPath)
         if rangeToolModel.maxNumCannotPlayVideoCells>0 {
             if indexPath.row <= rangeToolModel.maxNumCannotPlayVideoCells-1 { // 上不可及
                 cell.cellStyle = kJPPlayUnreachCellStyle.up
             }
-            else if indexPath.row>=models.count - rangeToolModel.maxNumCannotPlayVideoCells { // 下不可及
+            else if indexPath.row>=model.data!.data.count - rangeToolModel.maxNumCannotPlayVideoCells { // 下不可及
                 cell.cellStyle = kJPPlayUnreachCellStyle.down
             }
             else{
@@ -133,6 +163,8 @@ extension STViewModel : UICollectionViewDataSource{
         else{
             cell.cellStyle = kJPPlayUnreachCellStyle.none
         }
+        
+        print("cellForItemAt")
         return cell
         
     }
@@ -148,6 +180,10 @@ extension STViewModel : UICollectionViewDelegateFlowLayout {
         let size  = CGSize(width: sScreenW, height: RowHei)
         
         return size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(collectionView.visibleCells.count)
     }
     
     // 实时监控cell滚动
@@ -255,6 +291,7 @@ extension STViewModel {
             // playingCell?.videoImv.stopPlay()
             // 1 把上个离中心距离最近的cell停止播放
             playingCell?.label.text = "stop"
+            playingCell?.videoImv.isHidden = false
             player?.stop()
             let url = URL(string: bestCell.videoPath)
             
@@ -269,14 +306,17 @@ extension STViewModel {
             //playingCell?.backgroundColor = UIColor.white
             // 3 执行正在播放cell的操作
             playingCell?.label.text = "start"
+            playingCell?.videoImv.isHidden = true
             startPlayer(palyView: (playingCell?.contentView)!, playUrlString: (playingCell?.videoPath)!)
         }else{   /// 同一个cell
             if bestCell.isScrollowOutWindow == true{
                 bestCell.isScrollowOutWindow = false
                 playingCell?.label.text = "stop"
+                playingCell?.videoImv.isHidden = false
                 player?.stop()
                 playingCell = bestCell
                 playingCell?.label.text = "start"
+                playingCell?.videoImv.isHidden = true
                 startPlayer(palyView: (playingCell?.contentView)!, playUrlString: (playingCell?.videoPath)!)
                 
             }
@@ -295,7 +335,7 @@ extension STViewModel {
             return
         }
         
-        // 防止弹出新的控制器时 tableView 自动调用滚动方法, 导致最后一个 cell 无法播放视频.
+        // 防止弹出新的控制器时  自动调用滚动方法, 导致最后一个 cell 无法播放视频.
         if rangeToolModel.tableViewRange.isHidden {
             return;
         }
@@ -305,6 +345,7 @@ extension STViewModel {
         if !playingCellIsVisiable() {
             //stopPlay()
             playingCell?.label.text = "stop"
+            playingCell?.videoImv.isHidden = false
             player?.stop()
             playingCell?.isScrollowOutWindow = true
             print("stopPlay()")
@@ -370,6 +411,7 @@ extension STViewModel {
         playingCell = videoCell
         
         videoCell.label.text = "start"
+        videoCell.videoImv.isHidden = true
         startPlayer(palyView: (playingCell?.contentView)!, playUrlString: (playingCell?.videoPath)!)
     }
     
@@ -378,7 +420,7 @@ extension STViewModel {
     func startPlayer(palyView : UIView,playUrlString : String){
         
         let configuration = STConfiguration()
-        configuration.isCache = true
+        configuration.isCache = false
         configuration.palyView = palyView
         configuration.playerLayerF = CGRect(x: 0, y: 0, width: sScreenW, height: RowHei)
         guard let url = URL(string: playUrlString) else { return }
@@ -388,6 +430,7 @@ extension STViewModel {
     }
     
     func stopPlayer(){
+        playingCell?.videoImv.isHidden = true
         player?.stop()
     }
     

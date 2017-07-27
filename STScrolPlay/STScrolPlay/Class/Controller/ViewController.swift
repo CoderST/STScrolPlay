@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
-        print("path = \(path)")
+//        print("path = \(path)")
         
         // 1 添加collectionView
         view.addSubview(collectionView)
@@ -43,22 +43,45 @@ class ViewController: UIViewController {
         viewModel.bindViewModel(bindView: collectionView)
         
         // 3 添加数据
-        viewModel.setupDatas()
+//        viewModel.setupDatas()
+      
+        viewModel.loadDatas(finishCallBack: {
+            self.collectionView.reloadData()
+//            [self.tableView layoutIfNeeded]; 
+            self.collectionView.layoutIfNeeded()
+            self.playFirstVideo()
+//            DispatchQueue.global().async {
+//                self.playFirstVideo()
+//            }
+            
+        }) { (message) in
+            
+        }
         
-        collectionView.reloadData()
+   
         
         // 4 画虚线区域
         viewModel.rangeToolModel.displayCollectionViewRange(centerView: collectionView, view: view)
         
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(collectionView.visibleCells.count)
+    }
+    
+    func playFirstVideo() {
         
         if viewModel.playingCell == nil {
             
             // Find the first cell need to play video in visiable cells.
             // 在可见cell中找第一个有视频的进行播放.
+            print("playFirstVideo")
             viewModel.playVideoInVisiableCells()
         }
         else{

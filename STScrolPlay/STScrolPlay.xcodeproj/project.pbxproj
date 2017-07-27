@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FAB51A01F2967B6005A6C85 /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB519F1F2967B6005A6C85 /* NetworkTools.swift */; };
+		0FAB51A21F29694A005A6C85 /* STConnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB51A11F29694A005A6C85 /* STConnotationModel.swift */; };
+		0FAB51A41F297B44005A6C85 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB51A31F297B44005A6C85 /* BaseModel.swift */; };
+		0FAB51C61F29856B005A6C85 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAB51C51F29856B005A6C85 /* UIImageView+Extension.swift */; };
 		0FB2DD671F2872F6004E7F06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB2DD661F2872F6004E7F06 /* AppDelegate.swift */; };
 		0FB2DD6C1F2872F6004E7F06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FB2DD6A1F2872F6004E7F06 /* Main.storyboard */; };
 		0FB2DD6E1F2872F6004E7F06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FB2DD6D1F2872F6004E7F06 /* Assets.xcassets */; };
@@ -28,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FAB519F1F2967B6005A6C85 /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
+		0FAB51A11F29694A005A6C85 /* STConnotationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STConnotationModel.swift; sourceTree = "<group>"; };
+		0FAB51A31F297B44005A6C85 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		0FAB51C51F29856B005A6C85 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		0FB2DD631F2872F6004E7F06 /* STScrolPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STScrolPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FB2DD661F2872F6004E7F06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FB2DD6B1F2872F6004E7F06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,6 +72,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FAB519E1F2967AF005A6C85 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				0FAB51C51F29856B005A6C85 /* UIImageView+Extension.swift */,
+				0FAB51A31F297B44005A6C85 /* BaseModel.swift */,
+				0FAB519F1F2967B6005A6C85 /* NetworkTools.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		0FB2DD5A1F2872F6004E7F06 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +121,7 @@
 				0FB2DDA41F287564004E7F06 /* ViewModel */,
 				0FB2DD941F287564004E7F06 /* Controller */,
 				0FB2DDA21F287564004E7F06 /* View */,
+				0FAB519E1F2967AF005A6C85 /* Tool */,
 				0FB2DD991F287564004E7F06 /* STPlayer */,
 			);
 			path = Class;
@@ -121,6 +140,7 @@
 			children = (
 				0FB2DD971F287564004E7F06 /* STModel.swift */,
 				0FB2DD981F287564004E7F06 /* STPlayerToolModel.swift */,
+				0FAB51A11F29694A005A6C85 /* STConnotationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,13 +317,17 @@
 			files = (
 				0FB2DDA61F287564004E7F06 /* ViewController.swift in Sources */,
 				0FB2DDAE1F287564004E7F06 /* UIColor-Extension.swift in Sources */,
+				0FAB51A01F2967B6005A6C85 /* NetworkTools.swift in Sources */,
 				0FB2DDA81F287564004E7F06 /* STPlayerToolModel.swift in Sources */,
 				0FB2DDB21F287564004E7F06 /* STViewModel.swift in Sources */,
 				0FB2DDAF1F287564004E7F06 /* URL+Extension.swift in Sources */,
 				0FB2DDAB1F287564004E7F06 /* STFileManager.swift in Sources */,
+				0FAB51A21F29694A005A6C85 /* STConnotationModel.swift in Sources */,
 				0FB2DDA71F287564004E7F06 /* STModel.swift in Sources */,
 				0FB2DDB01F287564004E7F06 /* STPlayProtocol.swift in Sources */,
 				0FB2DD671F2872F6004E7F06 /* AppDelegate.swift in Sources */,
+				0FAB51A41F297B44005A6C85 /* BaseModel.swift in Sources */,
+				0FAB51C61F29856B005A6C85 /* UIImageView+Extension.swift in Sources */,
 				0FB2DDAC1F287564004E7F06 /* STPlayer.swift in Sources */,
 				0FB2DDAD1F287564004E7F06 /* STReourceLoaderManager.swift in Sources */,
 				0FB2DDA91F287564004E7F06 /* STConfiguration.swift in Sources */,

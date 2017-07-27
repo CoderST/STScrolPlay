@@ -1,12 +1,23 @@
 PODS:
+  - Alamofire (4.5.0)
+  - MJExtension (3.0.13)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
+  - Alamofire
+  - MJExtension (~> 3.0.13)
+  - SDWebImage (~> 3.8.0)
   - SVProgressHUD (~> 2.1.2)
 
 SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: c4575b89d00f4f1dd1ed6912bc39b6f447caec16
+PODFILE CHECKSUM: 123330a5408562060c4391613361bf57ba93c9f2
 
 COCOAPODS: 1.1.1
