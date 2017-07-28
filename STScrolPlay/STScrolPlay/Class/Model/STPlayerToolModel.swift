@@ -7,8 +7,8 @@
 //  画虚线
 
 import UIKit
-fileprivate let navHeight : CGFloat = 0
-fileprivate let tabHeight : CGFloat = 0
+fileprivate let navHeight : CGFloat = NavAndStatusTotalHei
+fileprivate let tabHeight : CGFloat = TabbarHei
 class STPlayerToolModel: NSObject {
 
     // 虚线区域View

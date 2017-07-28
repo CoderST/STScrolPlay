@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import MJExtension
 let sScreenW = UIScreen.main.bounds.width
 let sScreenH = UIScreen.main.bounds.height
 let screenSize = UIScreen.main.bounds.size
@@ -48,37 +47,38 @@ class STViewModel: NSObject,PlayProtocol {
     // collectionView
     fileprivate var collectionView : UICollectionView!
 
-    fileprivate lazy var videoPathStrings: Array = {
-        return [
-            "http://lavaweb-10015286.video.myqcloud.com/%E5%B0%BD%E6%83%85LAVA.mp4",
-            "http://lavaweb-10015286.video.myqcloud.com/lava-guitar-creation-2.mp4",
-            "http://lavaweb-10015286.video.myqcloud.com/hong-song-mei-gui-mu-2.mp4",
-            "http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4",
-            
-            // This path is a https.
-            // "https://bb-bang.com:9002/Test/Vedio/20170110/f49601b6bfe547e0a7d069d9319388f4.mp4",
-            // "http://123.103.15.1NavAndStatusTotalHei:8880/myVirtualImages/14266942.mp4",
-            
-            // This video saved in amazon, maybe load sowly.
-            // "http://vshow.s3.amazonaws.com/file147801253818487d5f00e2ae6e0194ab085fe4a43066c.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_01.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_02.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_03.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_04.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_05.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_06.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_07.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_08.mp4",
-            
-            // To simulate the cell have no video to play.
-            // "",
-            "http://120.25.226.186:32812/resources/videos/minion_10.mp4",
-            "http://120.25.226.186:32812/resources/videos/minion_11.mp4",
-            "http://lavaweb-10015286.video.myqcloud.com/%E5%B0%BD%E6%83%85LAVA.mp4",
-            "http://lavaweb-10015286.video.myqcloud.com/lava-guitar-creation-2.mp4",
-            "http://lavaweb-10015286.video.myqcloud.com/hong-song-mei-gui-mu-2.mp4",
-            "http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4"]
-    }()
+    
+//    fileprivate lazy var videoPathStrings: Array = {
+//        return [
+//            "http://lavaweb-10015286.video.myqcloud.com/%E5%B0%BD%E6%83%85LAVA.mp4",
+//            "http://lavaweb-10015286.video.myqcloud.com/lava-guitar-creation-2.mp4",
+//            "http://lavaweb-10015286.video.myqcloud.com/hong-song-mei-gui-mu-2.mp4",
+//            "http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4",
+//            
+//            // This path is a https.
+//            // "https://bb-bang.com:9002/Test/Vedio/20170110/f49601b6bfe547e0a7d069d9319388f4.mp4",
+//            // "http://123.103.15.1NavAndStatusTotalHei:8880/myVirtualImages/14266942.mp4",
+//            
+//            // This video saved in amazon, maybe load sowly.
+//            // "http://vshow.s3.amazonaws.com/file147801253818487d5f00e2ae6e0194ab085fe4a43066c.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_01.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_02.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_03.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_04.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_05.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_06.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_07.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_08.mp4",
+//            
+//            // To simulate the cell have no video to play.
+//            // "",
+//            "http://120.25.226.186:32812/resources/videos/minion_10.mp4",
+//            "http://120.25.226.186:32812/resources/videos/minion_11.mp4",
+//            "http://lavaweb-10015286.video.myqcloud.com/%E5%B0%BD%E6%83%85LAVA.mp4",
+//            "http://lavaweb-10015286.video.myqcloud.com/lava-guitar-creation-2.mp4",
+//            "http://lavaweb-10015286.video.myqcloud.com/hong-song-mei-gui-mu-2.mp4",
+//            "http://lavaweb-10015286.video.myqcloud.com/ideal-pick-2.mp4"]
+//    }()
 
     
     // MARK:- 网络请求
@@ -105,14 +105,6 @@ class STViewModel: NSObject,PlayProtocol {
             finishCallBack()
         }
     }
-    
-//    func setupDatas() {
-//        for videoPathString in videoPathStrings{
-//            let model = STModel()
-//            model.urlString = videoPathString
-//            models.append(model)
-//        }
-//    }
 }
 
 extension STViewModel {
@@ -222,14 +214,14 @@ extension STViewModel {
     func findTheBestToPlayVideoCell() -> STCell?{
         //
         var windowRect = UIScreen.main.bounds
-//        windowRect.origin.y = NavAndStatusTotalHei;
-//        windowRect.size.height -= (NavAndStatusTotalHei + TabbarHei);
+        windowRect.origin.y = NavAndStatusTotalHei;
+        windowRect.size.height -= (NavAndStatusTotalHei + TabbarHei)
         
         // To find next cell need play video.
         // 找到下一个要播放的cell(最在屏幕中心的).
         var finialCell : STCell?
         let visiableCells : [STCell] = collectionView.visibleCells as! [STCell];
-        var gap : CGFloat = CGFloat(MAXFLOAT)
+//        var gap : CGFloat = CGFloat(MAXFLOAT)
         
         for cell in visiableCells{
             if cell.videoPath.characters.count>0 { //  如果这个cell有视频
@@ -275,11 +267,33 @@ extension STViewModel {
 //                        finialCell = cell
 //                    }
                     
-                    /***********cell动态高度算法************/
-                    guard let coorCgrect = cell.superview?.convert(cell.frame, to: nil) else { continue }
-
-                    let point = CGPoint(x: sScreenW * 0.5, y: screenSize.height * 0.5)
-             
+                    /***********cell动态高度算法1************/
+                    /* 相对于整个屏幕的坐标来计算(要把下面注释)
+                     windowRect.origin.y = NavAndStatusTotalHei;
+                     windowRect.size.height -= (NavAndStatusTotalHei + TabbarHei);
+ 
+                    */
+//                    guard let coorCgrect = cell.superview?.convert(cell.frame, to: nil) else { continue }
+//
+//                    let point = CGPoint(x: sScreenW * 0.5, y: screenSize.height * 0.5)
+//             
+//                    if coorCgrect.contains(point) &&  cell.cellStyle == kJPPlayUnreachCellStyle.none{
+//                        finialCell = cell
+//                        
+//                    }
+//                    
+//                    if cell.indexPath?.item == model.data!.data.count - 1{
+//                        finialCell = cell
+//                        break
+//                    }
+                    /**********************/
+                    
+                    /***********cell动态高度算法2************/
+                    // 相对于rangeToolModel.tableViewRange的坐标来计算
+                    guard let coorCgrect = cell.superview?.convert(cell.frame, to: rangeToolModel.tableViewRange) else { continue }
+                    
+                    let point = CGPoint(x: sScreenW * 0.5, y: windowRect.size.height * 0.5)
+                    
                     if coorCgrect.contains(point) &&  cell.cellStyle == kJPPlayUnreachCellStyle.none{
                         finialCell = cell
                         
